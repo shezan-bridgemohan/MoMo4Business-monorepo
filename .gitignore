@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Turborepo cache
+.turbo/
+
+# Build outputs
+apps/web-app/dist/
+apps/mobile-app/dist/
+packages/*/dist/
+
+# Expo
+apps/mobile-app/.expo/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# macOS
+.DS_Store

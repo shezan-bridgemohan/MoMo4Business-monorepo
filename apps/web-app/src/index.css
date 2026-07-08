@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@import "@shezan-test/mtn-design-tokens/index.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ==========================================================================
+     TYPOGRAPHY DEFAULTS
+     ========================================================================== */
+  --font-sans: "Google Sans", system-ui, -apple-system, sans-serif;
+
+  /* ==========================================================================
+     ANIMATION KEYFRAMES & UTILITIES (Tailwind v4 native structure)
+     ========================================================================== */
+
+  /* 1. Register All Premium Keyframes */
+  @keyframes momo-fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes momo-shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes slideInFromRight {
+    0% {
+      opacity: 0;
+      transform: translate3d(24px, 0, 0) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+  @keyframes slideInFromLeft {
+    0% {
+      opacity: 0;
+      transform: translate3d(-24px, 0, 0) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+  @keyframes fluidReveal {
+    0% { 
+      opacity: 0; 
+      transform: translate3d(0, 6px, 0); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: translate3d(0, 0, 0); 
+    }
+  }
+
+  /* 2. Bind into named Tailwind utility tokens */
+  --animate-momo-fade-in: momo-fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-momo-shimmer: momo-shimmer 2s infinite;
+  
+  --animate-slide-next: slideInFromRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-prev: slideInFromLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-reveal-delayed: fluidReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}

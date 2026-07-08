@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "@shared/tokens/index.css";
+
+@source "../../../packages/ui-components/src/**/*.tsx";
+@source "../../../packages/ui-components/src/**/*.ts";
+@source "../../../packages/ui-components/src/**/*.jsx";
+@source "../../../packages/ui-components/src/**/*.js";

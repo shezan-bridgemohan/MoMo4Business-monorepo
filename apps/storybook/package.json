@@ -1,0 +1,30 @@
+{
+  "name": "storybook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "open http://localhost:6006 && storybook dev -p 6006",
+    "build": "storybook build",
+    "preview": "open http://localhost:6006 && storybook dev -p 6006"
+  },
+  "dependencies": {
+    "@shared/tokens": "workspace:*",
+    "@tailwindcss/postcss": "^4.3.2",
+    "postcss": "^8.5.16",
+    "postcss-import": "^16.1.1",
+    "tailwindcss": "^4.3.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "8.6.18",
+    "@storybook/react": "8.6.18",
+    "@storybook/react-vite": "8.6.18",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "storybook": "8.6.18",
+    "vite": "^6.0.0",
+    "typescript": "~6.0.2"
+  }
+}

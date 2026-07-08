@@ -1,5 +1,5 @@
 {
-  "name": "@shezan-test/mtn-design-tokens",
+  "name": "@shared/tokens",
   "version": "1.0.0",
   "type": "module",
   "description": "",

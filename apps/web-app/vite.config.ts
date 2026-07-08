@@ -10,6 +10,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["@shezan-test/mtn-design-tokens"],
+    exclude: ["@shared/tokens"],
   },
 });

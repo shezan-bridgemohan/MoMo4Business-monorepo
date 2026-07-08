@@ -4,7 +4,7 @@
 @import "nativewind/theme";
 
 /* 1. Imports your current variables */
-@import "@shezan-test/mtn-design-tokens/index.css";
+@import "@shared/tokens/index.css";
 
 /* 2. FORCE Tailwind to dynamically track your workspace folder for live updates */
 @source "../../packages/shared-tokens/**/*.css";

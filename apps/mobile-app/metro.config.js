@@ -4,8 +4,8 @@ const path = require("path");
 
 const config = getDefaultConfig(__dirname);
 
-// 1. Point directly to the folder containing your index.css
-config.watchFolders = [path.resolve(__dirname, "../shared-tokens")];
+// 1. Point directly to the sibling workspace package containing your index.css
+config.watchFolders = [path.resolve(__dirname, "../../packages/shared-tokens")];
 
 config.resolver.nodeModulesPaths = [
   path.resolve(__dirname, "node_modules"),

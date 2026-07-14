@@ -1,4 +1,3 @@
-import React from "react";
 import type { ButtonHTMLAttributes, MouseEventHandler } from "react";
 
 export type ButtonSize = "large" | "small" | "xsmall";
@@ -33,8 +32,8 @@ const sizeContainerClasses: Record<ButtonPlatform, Record<ButtonSize, string>> =
     large: "h-[55px] px-[32px] py-[4px]",
     // Figma desktop small: h55, px24, py4
     small: "h-[55px] px-[24px] py-[4px]",
-    // Desktop spec exposes small/large variants; xsmall falls back to small dimensions
-    xsmall: "h-[55px] px-[24px] py-[4px]",
+    // Compact desktop action size for dense toolbars/action trays
+    xsmall: "h-[40px] px-[20px] py-[4px]",
   },
 };
 
@@ -47,7 +46,7 @@ const sizeLabelClasses: Record<ButtonPlatform, Record<ButtonSize, string>> = {
   "desktop-web": {
     large: "text-base leading-6 font-medium uppercase",
     small: "text-[14px] leading-[18px] font-medium uppercase",
-    xsmall: "text-[14px] leading-[18px] font-medium uppercase",
+    xsmall: "text-[12px] leading-4 font-medium uppercase",
   },
 };
 

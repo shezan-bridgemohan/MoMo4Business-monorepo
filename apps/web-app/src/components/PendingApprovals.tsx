@@ -111,19 +111,19 @@ export default function PendingApprovals({
   const totalPending = singleData.length + bulkData.length;
 
   return (
-    <div className="space-y-4 pt-2">
+    <div className="space-y-(--spacing-momo-container-gap) pt-(--spacing-momo-element-spacing)">
       {/* Top Heading with dynamic global count */}
       <div className="flex items-center justify-between">
-        <h3 className="momo-typo-heading-sm text-momo-blue">
+        <h3 className="momo-typo-heading-sm text-momo-blue dark:text-white">
           Pending Approvals
         </h3>
-        <span className="momo-typo-label-lg text-momo-blue border border-border-default px-3 py-1 rounded-full bg-surface-default">
+        <span className="momo-typo-label-lg text-momo-blue dark:text-white border border-border-default px-3 py-1 rounded-full bg-surface-default">
           {totalPending} Pending approvals
         </span>
       </div>
 
       {/* Tab Switcher */}
-      <div className="flex items-center justify-between bg-surface-default border border-border-default p-2 rounded-full">
+      <div className="flex items-center justify-between bg-surface-default border border-border-default px-(--spacing-momo-card-padding) py-(--spacing-momo-element-spacing) rounded-full">
         <div className="flex gap-2 flex-1 max-w-md">
           {["single", "bulk"].map((tab) => {
             const count =
@@ -134,8 +134,8 @@ export default function PendingApprovals({
                 onClick={() => setActiveTab(tab)}
                 className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full momo-typo-label-lg transition-all duration-300 ease-in-out ${
                   activeTab === tab
-                    ? "bg-surface-secondary text-momo-blue shadow-momo-sm"
-                    : "text-text-secondary hover:text-momo-blue/70"
+                    ? "bg-surface-secondary text-momo-blue dark:text-white shadow-momo-sm"
+                    : "text-text-secondary hover:text-momo-blue/70 dark:hover:text-white"
                 }`}
               >
                 {tab === "single" ? "Single Transactions" : "Bulk Transactions"}{" "}
@@ -158,7 +158,7 @@ export default function PendingApprovals({
       </div>
 
       {/* Table Header Structure Grid */}
-      <div className="bg-surface-default rounded-xl px-4 py-3 grid grid-cols-6 gap-3 text-center momo-typo-label-lg text-momo-blue border border-border-default">
+      <div className="bg-surface-default rounded-xl px-(--spacing-momo-card-padding) py-(--spacing-momo-element-spacing) grid grid-cols-6 gap-(--spacing-momo-element-spacing) text-center momo-typo-label-lg text-momo-blue dark:text-white border border-border-default">
         <div>Date Created</div>
         <div>Reference</div>
         <div>Transaction ID</div>
@@ -168,12 +168,12 @@ export default function PendingApprovals({
       </div>
 
       {/* Dynamic Rows Container Wrapper */}
-      <div className="space-y-2 max-h-[320px] overflow-y-auto pr-1">
+      <div className="space-y-12 max-h-[320px] overflow-y-auto pr-1">
         {currentRows.length > 0 ? (
           currentRows.map((row) => (
             <div
               key={row.txId}
-              className="bg-surface-default px-4 py-3 grid grid-cols-6 gap-3 text-center momo-typo-label-lg text-text-secondary rounded-xl border border-border-default shadow-momo-sm hover:border-momo-blue/30 transition-all duration-200"
+              className="bg-surface-default px-(--spacing-momo-card-padding) py-(--spacing-momo-element-spacing) grid grid-cols-6 gap-(--spacing-momo-element-spacing) text-center momo-typo-label-lg text-text-secondary rounded-xl border border-border-default shadow-momo-sm hover:border-momo-blue/30 transition-all duration-200"
             >
               <div className="text-text-secondary">{row.date}</div>
               <div className="tracking-tight text-text-default">

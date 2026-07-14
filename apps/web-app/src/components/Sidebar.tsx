@@ -66,18 +66,18 @@ export default function Sidebar() {
   return (
     <aside
       /* Dynamic dynamic layout configurations width: w-64 vs w-20 */
-      className={`bg-surface-default flex flex-col justify-between px-3 py-4 relative border-r border-border-default transition-all duration-300 ease-in-out ${
+      className={`bg-surface-default flex flex-col justify-between p-20 relative border-r border-border-default transition-all duration-300 ease-in-out ${
         isCollapsed ? "w-[80px]" : "w-[270px]"
       }`}
     >
       {/* Flight Control Toggle button: added active onClick behavior and indicator rotation dynamics */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className={`absolute -right-3 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-surface-default border border-border-default flex items-center justify-center shadow-momo-sm text-text-secondary hover:text-momo-blue text-xs z-50 transition-transform duration-300 ${
+        className={`absolute -right-3 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-surface-default border border-border-default flex items-center justify-center shadow-momo-sm text-text-secondary hover:text-momo-blue dark:hover:text-white text-xs z-50 transition-transform duration-300 ${
           isCollapsed ? "rotate-180" : ""
         }`}
       >
-        <ChevronLeft className="w-4 h-4" />
+        <ChevronLeft className="w-20 h-20" />
       </button>
 
       <div className="space-y-6 overflow-x-hidden">
@@ -85,10 +85,10 @@ export default function Sidebar() {
           {/* Static Home Link */}
           <button
             type="button"
-            className="flex items-center bg-momo-sidebarActive text-white px-4 py-3 rounded-xl momo-typo-label-lg h-12"
+            className="flex items-center bg-momo-sidebarActive text-white dark:text-momo-blue px-4 py-3 rounded-xl momo-typo-label-lg h-12"
           >
             <div className="flex items-center gap-3 min-w-max">
-              <Home className="w-5 h-5" />
+              <Home className="w-20 h-20" />
               <span
                 className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
               >
@@ -103,15 +103,15 @@ export default function Sidebar() {
             const Icon = section.icon;
 
             return (
-              <div key={section.key} className="flex flex-col">
+              <div key={section.key} className="flex flex-col my-20">
                 <button
                   onClick={(e) => toggleMenu(section.key, e)}
-                  className={`flex items-center justify-between w-full text-text-default px-4 py-3 hover:bg-surface-secondary rounded-xl momo-typo-body-md transition-colors text-left h-12 ${
+                  className={`flex items-center justify-between w-full text-momo-blue dark:text-white px-4 py-3 hover:bg-surface-secondary rounded-xl momo-typo-body-md transition-colors text-left h-12 ${
                     isOpen && !isCollapsed ? "bg-surface-secondary" : ""
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-max">
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-20 h-20" />
                     <span
                       className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
                     >
@@ -121,9 +121,9 @@ export default function Sidebar() {
                   <span
                     className={`text-[10px] opacity-60 transition-all duration-200 ${
                       isCollapsed ? "scale-0 opacity-0" : ""
-                    } ${isOpen ? "rotate-180 text-momo-blue" : ""}`}
+                    } ${isOpen ? "rotate-180 text-momo-blue dark:text-white" : ""}`}
                   >
-                    <ChevronDown className="w-4 h-4" />
+                    <ChevronDown className="w-20 h-20" />
                   </span>
                 </button>
 
@@ -140,7 +140,7 @@ export default function Sidebar() {
                       <button
                         key={`${section.key}-${subItem}`}
                         type="button"
-                        className="block momo-typo-label-lg py-1 text-text-secondary hover:text-momo-blue transition-colors whitespace-nowrap"
+                        className="block momo-typo-label-lg py-1 text-text-secondary hover:text-momo-blue dark:hover:text-white transition-colors whitespace-nowrap"
                       >
                         {subItem}
                       </button>
@@ -157,7 +157,7 @@ export default function Sidebar() {
             className="flex items-center text-text-default px-4 py-3 hover:bg-surface-secondary rounded-xl momo-typo-label-lg transition-colors h-12"
           >
             <div className="flex items-center gap-3 min-w-max">
-              <User className="w-5 h-5" />
+              <User className="w-20 h-20" />
               <span
                 className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
               >
@@ -169,7 +169,7 @@ export default function Sidebar() {
       </div>
 
       {/* Footer Block Utilities */}
-      <div className="space-y-3 pt-10 border-t border-border-default momo-typo-label-xl text-momo-blue pl-2 overflow-hidden">
+      <div className="space-y-3 pt-10 border-t border-border-default momo-typo-label-xl text-momo-blue dark:text-white pl-2 overflow-hidden">
         {[
           {
             key: "contact-customer-care",
@@ -189,9 +189,9 @@ export default function Sidebar() {
             <button
               key={item.key}
               type="button"
-              className="flex items-center gap-3 hover:underline h-6 min-w-max"
+              className="flex items-center gap-3 hover:underline min-w-max"
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="w-20 h-20" />
               <span
                 className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
               >
@@ -205,7 +205,7 @@ export default function Sidebar() {
           type="button"
           className="flex items-center gap-3 hover:underline text-status-danger pt-2 h-8 min-w-max"
         >
-          <LogOut className="w-4 h-4" />
+          <LogOut className="w-20 h-20" />
           <span
             className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
           >

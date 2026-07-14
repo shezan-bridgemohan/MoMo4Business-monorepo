@@ -12,7 +12,7 @@ export default function Header({
   return (
     <header className="bg-momo-blue h-16.5 flex items-center justify-between px-6 md:px-8 text-white sticky top-0 z-50 shadow-momo-sm">
       <div className="flex items-center gap-6">
-        <div className="bg-momo-blue/10 p-2 rounded-xl border border-momo-yellow/70 flex items-center justify-center">
+        <div className="bg-momo-blue/10 p-6 rounded-xl border border-momo-yellow/70 flex items-center justify-center">
           <img
             src="https://momobizuat.momo.africa/momo4business-web-3-1-x/App%20Icon.png"
             alt=""

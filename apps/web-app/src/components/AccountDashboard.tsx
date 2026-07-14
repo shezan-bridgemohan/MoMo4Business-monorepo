@@ -7,6 +7,7 @@ import {
   ChevronRight,
   Eye,
 } from "lucide-react";
+import { Button } from "@shared/ui-components";
 
 interface Transaction {
   direction: "in" | "out";
@@ -113,11 +114,11 @@ export default function AccountDashboard() {
     slideDirection === "next" ? "animate-slide-next" : "animate-slide-prev";
 
   return (
-    <div className="bg-surface-default p-6 rounded-[14px] border border-border-default shadow-momo-sm grid grid-cols-1 xl:grid-cols-3 gap-6 relative transition-colors overflow-hidden">
+    <div className="bg-surface-default px-[var(--layout-content-padding-mobile)] md:px-[var(--layout-content-padding-tablet)] xl:px-[var(--layout-content-padding-desktop)] py-[var(--spacing-momo-card-padding)] rounded-[14px] border border-border-default shadow-momo-sm grid grid-cols-1 xl:grid-cols-3 gap-[var(--spacing-momo-container-gap)] relative transition-colors overflow-hidden">
       {/* LEFT SIDE DATA REGION */}
       <div
         key={`left-panel-${currentIndex}`}
-        className={`xl:col-span-2 space-y-4 will-change-transform ${animationClass}`}
+        className={`xl:col-span-2 space-y-[var(--spacing-momo-element-spacing)] will-change-transform ${animationClass}`}
       >
         <div className="flex items-start justify-between">
           <div>
@@ -141,7 +142,7 @@ export default function AccountDashboard() {
         </div>
 
         {/* CHART SECTION */}
-        <div className="h-56 pt-4 relative flex items-end">
+        <div className="h-56 pt-[var(--spacing-momo-element-spacing)] relative flex items-end">
           <div className="absolute left-0 bottom-0 top-0 w-12 momo-typo-label-sm-medium text-text-secondary flex flex-col justify-between pr-2 text-right">
             <span>50.0M</span>
             <span>25.0M</span>
@@ -184,12 +185,16 @@ export default function AccountDashboard() {
       </div>
 
       {/* RIGHT SIDE TRANSACTION FEED */}
-      <div className="xl:pl-4 flex flex-col justify-between xl:border-l border-border-default/70">
+      <div className="xl:pl-[var(--spacing-momo-card-padding)] flex flex-col justify-between xl:border-l border-border-default/70">
         <div className="flex items-center justify-between momo-typo-label-md mb-3">
           <span className="text-text-default">Recent Activity</span>
-          <button type="button" className="text-momo-blue underline">
-            View All
-          </button>
+          <Button
+            label="View All"
+            platform="desktop-web"
+            size="xsmall"
+            variant="primary"
+            className="text-momo-blue dark:text-white"
+          />
         </div>
 
         {/* The feed slides using the same axis behavior but introduces a slightly staggered sub-reveal class */}
@@ -227,16 +232,31 @@ export default function AccountDashboard() {
         </div>
 
         {/* Action Tray */}
-        <div className="flex gap-2 pt-4">
-          <button className="flex-1 py-2 px-4 rounded-momo-btn border border-momo-blue text-momo-blue momo-typo-label-sm-medium hover:bg-surface-secondary transition-colors">
-            Buy
-          </button>
-          <button className="flex-1 py-2 px-4 rounded-momo-btn border border-momo-blue text-momo-blue momo-typo-label-sm-medium hover:bg-surface-secondary transition-colors">
-            Pay
-          </button>
-          <button className="flex-1 py-2 px-4 rounded-momo-btn bg-momo-blue text-white momo-typo-label-sm-medium hover:opacity-90 transition-opacity">
-            Transfer
-          </button>
+        <div className="flex gap-[var(--spacing-12)] pt-[var(--spacing-momo-element-spacing)]">
+          <Button
+            label="Buy"
+            platform="desktop-web"
+            size="xsmall"
+            variant="primary"
+            fullWidth
+            className="normal-case"
+          />
+          <Button
+            label="Pay"
+            platform="desktop-web"
+            size="xsmall"
+            variant="primary"
+            fullWidth
+            className="normal-case"
+          />
+          <Button
+            label="Transfer"
+            platform="desktop-web"
+            size="xsmall"
+            variant="primary"
+            fullWidth
+            className="normal-case"
+          />
         </div>
       </div>
 

@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "open http://localhost:6006 && storybook dev -p 6006",
+    "dev": "storybook dev -p 6006 --no-open",
     "build": "storybook build",
-    "preview": "open http://localhost:6006 && storybook dev -p 6006"
+    "preview": "storybook dev -p 6006 --no-open"
   },
   "dependencies": {
     "@shared/tokens": "workspace:*",

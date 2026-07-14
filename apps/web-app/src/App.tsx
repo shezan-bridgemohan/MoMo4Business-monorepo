@@ -64,7 +64,7 @@ export default function App() {
         <main className="flex-1 flex flex-col items-center p-8 md:p-10 animate-momo-fade-in">
           {/* Centered bounding box enforcing consistency across layout segments */}
           <div className="w-full max-w-310 space-y-8">
-            <h1 className="momo-typo-heading-sm text-momo-blue">Accounts</h1>
+            <h1 className="momo-typo-heading-sm text-momo-blue dark:text-white">Accounts</h1>
 
             <BalanceCard title="Total Balance" />
 

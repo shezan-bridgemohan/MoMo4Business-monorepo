@@ -1,13 +1,45 @@
 @import "tailwindcss";
 @import "@shared/tokens/index.css";
 
+/* Load MTN Brighter Sans from the shared token package assets. */
+@font-face {
+  font-family: "MTN Brighter Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+    src: url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Regular.woff2") format("woff2"),
+      url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "MTN Brighter Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+    src: url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Medium.woff2") format("woff2"),
+      url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "MTN Brighter Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+    src: url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Bold.woff2") format("woff2"),
+      url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Bold.woff") format("woff");
+}
+
+:root {
+  --typography-font-family-primary: "MTN Brighter Sans", system-ui, -apple-system, sans-serif;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   /* ==========================================================================
      TYPOGRAPHY DEFAULTS
      ========================================================================== */
-  --font-sans: "Google Sans", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--typography-font-family-primary), system-ui, -apple-system, sans-serif;
 
   /* ==========================================================================
      ANIMATION KEYFRAMES & UTILITIES (Tailwind v4 native structure)

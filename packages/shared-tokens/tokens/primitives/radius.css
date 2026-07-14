@@ -1,0 +1,14 @@
+@theme {
+  --radius-0: 0px;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-full: 9999px;
+
+  --radius-momo-card-token: 20px;
+  --radius-momo-button-token: 24px;
+  --radius-momo-card: var(--radius-momo-card-token);
+  --radius-momo-btn: var(--radius-momo-button-token);
+  --radius-momo-input: var(--radius-12);
+}

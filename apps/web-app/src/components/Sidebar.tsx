@@ -66,36 +66,36 @@ export default function Sidebar() {
   return (
     <aside
       /* Dynamic dynamic layout configurations width: w-64 vs w-20 */
-      className={`bg-white dark:bg-slate-900 flex flex-col justify-between p-16 relative pt-40 border-r border-momo-light transition-all duration-300 ease-in-out ${
-        isCollapsed ? "w-80" : "w-[calc(var(--spacing-64)*4)]"
+      className={`bg-surface-default flex flex-col justify-between px-3 py-4 relative border-r border-border-default transition-all duration-300 ease-in-out ${
+        isCollapsed ? "w-[80px]" : "w-[270px]"
       }`}
     >
       {/* Flight Control Toggle button: added active onClick behavior and indicator rotation dynamics */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className={`absolute -right-12 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white dark:bg-slate-800 border border-momo-light flex items-center justify-center shadow-momo-sm text-slate-400 hover:text-momo-blue dark:hover:text-momo-yellow text-xs z-50 transition-transform duration-300 ${
+        className={`absolute -right-3 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-surface-default border border-border-default flex items-center justify-center shadow-momo-sm text-text-secondary hover:text-momo-blue text-xs z-50 transition-transform duration-300 ${
           isCollapsed ? "rotate-180" : ""
         }`}
       >
-        <ChevronLeft className="w-20 h-20" />
+        <ChevronLeft className="w-4 h-4" />
       </button>
 
-      <div className="space-y-24 overflow-x-hidden">
+      <div className="space-y-6 overflow-x-hidden">
         <nav className="space-y-4">
           {/* Static Home Link */}
-          <a
-            href="#"
-            className="flex items-center bg-momo-sidebarActive text-white px-16 py-10 rounded-md font-bold text-sm h-40"
+          <button
+            type="button"
+            className="flex items-center bg-momo-sidebarActive text-white px-4 py-3 rounded-xl momo-typo-label-lg h-12"
           >
-            <div className="flex items-center gap-12 min-w-[max-content]">
-              <Home className="w-24 h-24" />
+            <div className="flex items-center gap-3 min-w-max">
+              <Home className="w-5 h-5" />
               <span
                 className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
               >
                 Home
               </span>
             </div>
-          </a>
+          </button>
 
           {/* Collapsible Dropdown Sections */}
           {menuSections.map((section) => {
@@ -106,14 +106,12 @@ export default function Sidebar() {
               <div key={section.key} className="flex flex-col">
                 <button
                   onClick={(e) => toggleMenu(section.key, e)}
-                  className={`flex items-center justify-between w-full text-momo-darkText dark:text-slate-300 px-16 py-10 hover:bg-momo-bgLight/50 dark:hover:bg-slate-800/50 rounded-md font-medium text-sm transition-colors text-left h-40 ${
-                    isOpen && !isCollapsed
-                      ? "bg-momo-bgLight/30 dark:bg-slate-800/30"
-                      : ""
+                  className={`flex items-center justify-between w-full text-text-default px-4 py-3 hover:bg-surface-secondary rounded-xl momo-typo-body-md transition-colors text-left h-12 ${
+                    isOpen && !isCollapsed ? "bg-surface-secondary" : ""
                   }`}
                 >
-                  <div className="flex items-center gap-12 min-w-[max-content]">
-                    <Icon className="w-24 h-24" />
+                  <div className="flex items-center gap-3 min-w-max">
+                    <Icon className="w-5 h-5" />
                     <span
                       className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
                     >
@@ -123,29 +121,29 @@ export default function Sidebar() {
                   <span
                     className={`text-[10px] opacity-60 transition-all duration-200 ${
                       isCollapsed ? "scale-0 opacity-0" : ""
-                    } ${isOpen ? "rotate-180 text-momo-blue dark:text-momo-yellow" : ""}`}
+                    } ${isOpen ? "rotate-180 text-momo-blue" : ""}`}
                   >
-                    <ChevronDown className="w-20 h-20" />
+                    <ChevronDown className="w-4 h-4" />
                   </span>
                 </button>
 
                 {/* Animated Dropdown Menu Panel Container: Hidden natively when side status is collapsed */}
                 <div
-                  className={`grid transition-all duration-200 ease-in-out pl-40 ${
+                  className={`grid transition-all duration-200 ease-in-out pl-10 ${
                     isOpen && !isCollapsed
                       ? "grid-rows-[1fr] opacity-100 my-4"
                       : "grid-rows-[0fr] opacity-0 overflow-hidden"
                   }`}
                 >
                   <div className="overflow-hidden space-y-4">
-                    {section.items.map((subItem, sIdx) => (
-                      <a
-                        key={sIdx}
-                        href="#"
-                        className="block text-xs font-medium py-6 text-slate-500 hover:text-momo-blue dark:text-slate-400 dark:hover:text-momo-yellow transition-colors whitespace-nowrap"
+                    {section.items.map((subItem) => (
+                      <button
+                        key={`${section.key}-${subItem}`}
+                        type="button"
+                        className="block momo-typo-label-lg py-1 text-text-secondary hover:text-momo-blue transition-colors whitespace-nowrap"
                       >
                         {subItem}
-                      </a>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -154,24 +152,24 @@ export default function Sidebar() {
           })}
 
           {/* Static Profile Link */}
-          <a
-            href="#"
-            className="flex items-center text-momo-darkText dark:text-slate-300 px-16 py-10 hover:bg-momo-bgLight/50 dark:hover:bg-slate-800/50 rounded-md font-medium text-sm transition-colors h-40"
+          <button
+            type="button"
+            className="flex items-center text-text-default px-4 py-3 hover:bg-surface-secondary rounded-xl momo-typo-label-lg transition-colors h-12"
           >
-            <div className="flex items-center gap-12 min-w-[max-content]">
-              <User className="w-24 h-24" />
+            <div className="flex items-center gap-3 min-w-max">
+              <User className="w-5 h-5" />
               <span
                 className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
               >
                 Profile
               </span>
             </div>
-          </a>
+          </button>
         </nav>
       </div>
 
       {/* Footer Block Utilities */}
-      <div className="space-y-16 pt-16 border-t border-momo-light text-xs font-semibold text-momo-blue dark:text-slate-400 pl-10 overflow-hidden">
+      <div className="space-y-3 pt-10 border-t border-border-default momo-typo-label-xl text-momo-blue pl-2 overflow-hidden">
         {[
           {
             key: "contact-customer-care",
@@ -188,32 +186,32 @@ export default function Sidebar() {
           const Icon = item.icon;
 
           return (
-            <a
+            <button
               key={item.key}
-              href="#"
-              className="flex items-center gap-12 hover:underline h-20 min-w-[max-content]"
+              type="button"
+              className="flex items-center gap-3 hover:underline h-6 min-w-max"
             >
-              <Icon className="w-24 h-24" />
+              <Icon className="w-4 h-4" />
               <span
                 className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
               >
                 {item.label}
               </span>
-            </a>
+            </button>
           );
         })}
 
-        <a
-          href="#"
-          className="flex items-center gap-12 hover:underline text-red-600 dark:text-red-400 pt-10 h-32 min-w-[max-content]"
+        <button
+          type="button"
+          className="flex items-center gap-3 hover:underline text-status-danger pt-2 h-8 min-w-max"
         >
-          <LogOut className="w-24 h-24" />
+          <LogOut className="w-4 h-4" />
           <span
             className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
           >
             Logout
           </span>
-        </a>
+        </button>
       </div>
     </aside>
   );

@@ -1,0 +1,130 @@
+@theme {
+  /* Neo Library Grid (node 26050:31869) */
+  --layout-grid-mobile-viewport: 320px;
+  --layout-grid-mobile-columns: 4;
+  --layout-grid-mobile-column-width: 55px;
+  --layout-grid-mobile-gutter: 20px;
+  --layout-grid-mobile-offset: 0px;
+
+  --layout-grid-desktop-viewport: 1280px;
+  --layout-grid-desktop-columns: 12;
+  --layout-grid-desktop-column-width: 75px;
+  --layout-grid-desktop-gutter: 20px;
+  --layout-grid-desktop-offset: 0px;
+
+  /* Derived container widths from Figma composition */
+  --layout-grid-mobile-max-width: 280px;
+  --layout-grid-desktop-max-width: 1120px;
+
+  /* Semantic aliases for app usage */
+  --layout-content-max-width-mobile: var(--layout-grid-mobile-max-width);
+  --layout-content-max-width-desktop: var(--layout-grid-desktop-max-width);
+  --layout-content-gutter-mobile: var(--layout-grid-mobile-gutter);
+  --layout-content-gutter-desktop: var(--layout-grid-desktop-gutter);
+
+  /* Neo Library Breakpoints (node 43985:245541) */
+  --layout-breakpoint-mobile-min: 320px;
+  --layout-breakpoint-mobile-max: 439px;
+  --layout-breakpoint-tablet-min: 440px;
+  --layout-breakpoint-tablet-max: 833px;
+  --layout-breakpoint-desktop-min: 834px;
+
+  /* Business Responsive presets (node 46136:256587) */
+  --layout-viewport-mobile-small-width: 320px;
+  --layout-viewport-mobile-small-height: 568px;
+  --layout-viewport-mobile-medium-width: 402px;
+  --layout-viewport-mobile-medium-height: 874px;
+  --layout-viewport-mobile-large-width: 440px;
+  --layout-viewport-mobile-large-height: 956px;
+
+  --layout-viewport-tablet-small-width: 744px;
+  --layout-viewport-tablet-small-height: 1133px;
+  --layout-viewport-tablet-medium-width: 834px;
+  --layout-viewport-tablet-medium-height: 1194px;
+  --layout-viewport-tablet-large-width: 1024px;
+  --layout-viewport-tablet-large-height: 1366px;
+  --layout-viewport-tablet-landscape-width: 1440px;
+  --layout-viewport-tablet-landscape-height: 960px;
+
+  --layout-viewport-desktop-small-width: 1280px;
+  --layout-viewport-desktop-small-height: 832px;
+  --layout-viewport-desktop-large-width: 1920px;
+  --layout-viewport-desktop-large-height: 1080px;
+
+  /* Core shell dimensions from responsive frames */
+  --layout-shell-header-height: 66px;
+  --layout-shell-footer-height: 63px;
+  --layout-shell-nav-open-width: 285px;
+  --layout-shell-nav-compact-width: 72px;
+
+  /* Content rails from responsive body frames */
+  --layout-content-width-mobile-small: 280px;
+  --layout-content-width-mobile-medium: 362px;
+  --layout-content-width-mobile-large: 400px;
+  --layout-content-width-tablet-small: 680px;
+  --layout-content-width-tablet-medium: 770px;
+  --layout-content-width-tablet-large: 850px;
+  --layout-content-width-tablet-landscape: 1266px;
+  --layout-content-width-desktop-small: 923px;
+  --layout-content-width-desktop-large: 1563px;
+
+  --layout-content-padding-mobile: 20px;
+  --layout-content-padding-tablet: 32px;
+  --layout-content-padding-desktop: 36px;
+}
+
+@layer utilities {
+  /* Drop-in overlay grids for design QA */
+  .momo-grid-mobile {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 55px));
+    column-gap: var(--layout-grid-mobile-gutter);
+    justify-content: center;
+  }
+
+  .momo-grid-desktop {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 75px));
+    column-gap: var(--layout-grid-desktop-gutter);
+    justify-content: center;
+  }
+
+  .momo-content-width {
+    width: 100%;
+    max-width: var(--layout-content-max-width-mobile);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-content-padding-mobile);
+    padding-right: var(--layout-content-padding-mobile);
+  }
+
+  @media (min-width: 744px) {
+    .momo-content-width {
+      padding-left: var(--layout-content-padding-tablet);
+      padding-right: var(--layout-content-padding-tablet);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .momo-content-width {
+      max-width: var(--layout-content-max-width-desktop);
+      padding-left: var(--layout-content-padding-desktop);
+      padding-right: var(--layout-content-padding-desktop);
+    }
+  }
+
+  /* Page shell helper using responsive header/footer/nav tokens */
+  .momo-layout-shell {
+    min-height: 100vh;
+    padding-top: var(--layout-shell-header-height);
+    padding-bottom: var(--layout-shell-footer-height);
+  }
+
+  .momo-layout-shell-nav-open {
+    padding-left: var(--layout-shell-nav-open-width);
+  }
+
+  .momo-layout-shell-nav-compact {
+    padding-left: var(--layout-shell-nav-compact-width);
+  }
+}

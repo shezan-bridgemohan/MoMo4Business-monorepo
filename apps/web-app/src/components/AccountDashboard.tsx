@@ -113,42 +113,41 @@ export default function AccountDashboard() {
     slideDirection === "next" ? "animate-slide-next" : "animate-slide-prev";
 
   return (
-    <div className="bg-white dark:bg-slate-900 p-24 rounded-momo-card border border-slate-100 dark:border-slate-800 shadow-sm grid grid-cols-3 gap-24 relative transition-colors overflow-hidden">
+    <div className="bg-surface-default p-6 rounded-[14px] border border-border-default shadow-momo-sm grid grid-cols-1 xl:grid-cols-3 gap-6 relative transition-colors overflow-hidden">
       {/* LEFT SIDE DATA REGION */}
       <div
         key={`left-panel-${currentIndex}`}
-        className={`col-span-2 space-y-16 will-change-transform ${animationClass}`}
+        className={`xl:col-span-2 space-y-4 will-change-transform ${animationClass}`}
       >
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+            <p className="momo-typo-label-md text-text-secondary">
               {activeAccount.accountName}
             </p>
-            <h2 className="text-2xl font-black text-momo-darkText dark:text-white mt-4 flex items-center gap-10">
+            <h2 className="momo-typo-heading-md text-text-default mt-1 flex items-center gap-2">
               UGX{" "}
-              <span className="tracking-tight font-mono">
-                {activeAccount.balance}
-              </span>{" "}
-              <Eye className="w-16 h-16 cursor-pointer select-none opacity-60 hover:opacity-100" />
+              <span className="tracking-tight">{activeAccount.balance}</span>
+              <Eye className="w-4 h-4 cursor-pointer select-none opacity-60 hover:opacity-100" />
             </h2>
           </div>
 
-          <div className="flex items-center gap-10 text-xs font-bold text-slate-600 dark:text-slate-300 bg-momo-bgLight dark:bg-slate-800 px-12 py-6 rounded-momo-input border border-slate-100 dark:border-slate-700">
+          <div className="flex items-center gap-2 momo-typo-label-sm-medium text-text-secondary bg-surface-secondary px-3 py-2 rounded-full border border-border-default">
             <span
-              className={`w-10 h-10 rounded-full ${activeAccount.moneyFlowDirection === "Settled" ? "bg-emerald-500" : "bg-amber-500"}`}
+              className={`w-10 h-10 rounded-full ${activeAccount.moneyFlowDirection === "Settled" ? "bg-status-positive" : "bg-status-warning"}`}
             />
-            {activeAccount.moneyFlowDirection} <ChevronDown className="w-12 h-12" />
+            {activeAccount.moneyFlowDirection}{" "}
+            <ChevronDown className="w-3 h-3" />
           </div>
         </div>
 
         {/* CHART SECTION */}
-        <div className="h-80 pt-16 relative flex items-end">
-          <div className="absolute left-0 bottom-0 top-0 w-48 text-[10px] font-bold text-slate-400 flex flex-col justify-between pr-10 text-right">
+        <div className="h-56 pt-4 relative flex items-end">
+          <div className="absolute left-0 bottom-0 top-0 w-12 momo-typo-label-sm-medium text-text-secondary flex flex-col justify-between pr-2 text-right">
             <span>50.0M</span>
             <span>25.0M</span>
             <span>0</span>
           </div>
-          <div className="flex-1 h-full ml-56 relative flex items-end">
+          <div className="flex-1 h-full ml-14 relative flex items-end">
             <svg
               className="w-full h-full overflow-visible"
               viewBox="0 0 400 100"
@@ -167,7 +166,7 @@ export default function AccountDashboard() {
                 className="fill-momo-chartFill transition-all duration-500 ease-in-out opacity-80"
               />
             </svg>
-            <div className="absolute left-0 right-0 -bottom-24 flex justify-between text-[10px] font-bold text-slate-400 px-4">
+            <div className="absolute left-0 right-0 -bottom-8 flex justify-between momo-typo-label-sm-medium text-text-secondary px-2">
               <div className="text-center">
                 90
                 <br />
@@ -185,48 +184,41 @@ export default function AccountDashboard() {
       </div>
 
       {/* RIGHT SIDE TRANSACTION FEED */}
-      <div className="pl-16 flex flex-col justify-between border-l border-momo-light/60">
-        <div className="flex items-center justify-between text-xs mb-10">
-          <span className="font-bold text-momo-darkText dark:text-slate-300">
-            Recent Activity
-          </span>
-          <a
-            href="#"
-            className="text-momo-blue dark:text-sky-400 underline font-semibold text-[11px]"
-          >
+      <div className="xl:pl-4 flex flex-col justify-between xl:border-l border-border-default/70">
+        <div className="flex items-center justify-between momo-typo-label-md mb-3">
+          <span className="text-text-default">Recent Activity</span>
+          <button type="button" className="text-momo-blue underline">
             View All
-          </a>
+          </button>
         </div>
 
         {/* The feed slides using the same axis behavior but introduces a slightly staggered sub-reveal class */}
         <div
           key={`right-panel-${currentIndex}`}
-          className={`space-y-10 max-h-80 overflow-y-auto pr-4 will-change-transform ${animationClass} animate-reveal-delayed`}
+          className={`space-y-3 max-h-56 overflow-y-auto pr-2 will-change-transform ${animationClass} animate-reveal-delayed`}
         >
-          {activeAccount.transactions.map((tx, i) => (
+          {activeAccount.transactions.map((tx) => (
             <div
-              key={i}
-              className="flex items-center justify-between text-[11px] border-b border-momo-bgLight dark:border-slate-800/50 pb-6"
+              key={`${tx.party}-${tx.time}-${tx.amount}`}
+              className="flex items-center justify-between momo-typo-label-sm-medium border-b border-border-default pb-2"
             >
               <div className="flex items-center gap-10">
                 <span
-                  className={`font-bold p-4 rounded-full text-xs ${tx.direction === "out" ? "text-red-500 bg-red-50 dark:bg-red-950/30" : "text-emerald-500 bg-emerald-50 dark:bg-emerald-950/30"}`}
+                  className={`font-bold p-4 rounded-full text-xs ${tx.direction === "out" ? "text-status-danger bg-momo-badgePendingBg" : "text-status-positive bg-surface-secondary"}`}
                 >
                   {tx.direction === "out" ? (
-                    <ArrowUpRight className="w-12 h-12" />
+                    <ArrowUpRight className="w-3 h-3" />
                   ) : (
-                    <ArrowDownLeft className="w-12 h-12" />
+                    <ArrowDownLeft className="w-3 h-3" />
                   )}
                 </span>
                 <div>
-                  <p className="font-bold tracking-tight text-slate-700 dark:text-slate-300">
-                    {tx.party}
-                  </p>
-                  <p className="text-[9px] text-slate-400">{tx.time}</p>
+                  <p className="tracking-tight text-text-default">{tx.party}</p>
+                  <p className="text-[10px] text-text-secondary">{tx.time}</p>
                 </div>
               </div>
               <span
-                className={`font-bold ${tx.direction === "out" ? "text-red-600 dark:text-red-400" : "text-emerald-600 dark:text-emerald-400"}`}
+                className={`font-bold ${tx.direction === "out" ? "text-status-danger" : "text-status-positive"}`}
               >
                 {tx.amount}
               </span>
@@ -235,35 +227,35 @@ export default function AccountDashboard() {
         </div>
 
         {/* Action Tray */}
-        <div className="flex gap-6 pt-12">
-          <button className="flex-1 py-4 px-10 rounded-momo-btn border border-momo-blue text-momo-blue dark:text-sky-400 font-bold text-xs hover:bg-momo-bgLight dark:hover:bg-slate-800 transition-colors">
+        <div className="flex gap-2 pt-4">
+          <button className="flex-1 py-2 px-4 rounded-momo-btn border border-momo-blue text-momo-blue momo-typo-label-sm-medium hover:bg-surface-secondary transition-colors">
             Buy
           </button>
-          <button className="flex-1 py-4 px-10 rounded-momo-btn border border-momo-blue text-momo-blue dark:text-sky-400 font-bold text-xs hover:bg-momo-bgLight dark:hover:bg-slate-800 transition-colors">
+          <button className="flex-1 py-2 px-4 rounded-momo-btn border border-momo-blue text-momo-blue momo-typo-label-sm-medium hover:bg-surface-secondary transition-colors">
             Pay
           </button>
-          <button className="flex-1 py-4 px-10 rounded-momo-btn bg-momo-blue text-white font-bold text-xs hover:opacity-90 transition-opacity">
+          <button className="flex-1 py-2 px-4 rounded-momo-btn bg-momo-blue text-white momo-typo-label-sm-medium hover:opacity-90 transition-opacity">
             Transfer
           </button>
         </div>
       </div>
 
       {/* TOP CAROUSEL CONTROLS */}
-      <div className="absolute top-16 right-16 flex items-center gap-10 bg-white/80 dark:bg-slate-900/80 px-4 py-2 rounded-full shadow-sm backdrop-blur-xs z-10">
-        <span className="text-[10px] font-bold text-slate-400 px-4 font-mono">
+      <div className="absolute top-4 right-4 flex items-center gap-2 bg-surface-default/85 px-3 py-1 rounded-full shadow-momo-sm backdrop-blur-xs z-10 border border-border-default">
+        <span className="momo-typo-label-sm-medium text-text-secondary px-2">
           {currentIndex + 1}/{accounts.length}
         </span>
         <button
           onClick={handlePrev}
-          className="w-20 h-20 bg-momo-bgLight dark:bg-slate-800 hover:bg-momo-blue hover:text-white dark:hover:bg-momo-yellow dark:hover:text-slate-900 rounded-full flex items-center justify-center text-xs font-bold text-slate-400 transition-all active:scale-90"
+          className="w-7 h-7 bg-surface-secondary hover:bg-momo-blue hover:text-white rounded-full flex items-center justify-center text-text-secondary transition-all active:scale-90"
         >
-          <ChevronLeft className="w-12 h-12" />
+          <ChevronLeft className="w-3 h-3" />
         </button>
         <button
           onClick={handleNext}
-          className="w-20 h-20 bg-momo-bgLight dark:bg-slate-800 hover:bg-momo-blue hover:text-white dark:hover:bg-momo-yellow dark:hover:text-slate-900 rounded-full flex items-center justify-center text-xs font-bold text-slate-400 transition-all active:scale-90"
+          className="w-7 h-7 bg-surface-secondary hover:bg-momo-blue hover:text-white rounded-full flex items-center justify-center text-text-secondary transition-all active:scale-90"
         >
-          <ChevronRight className="w-12 h-12" />
+          <ChevronRight className="w-3 h-3" />
         </button>
       </div>
     </div>

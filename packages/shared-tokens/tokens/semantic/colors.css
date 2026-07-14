@@ -1,0 +1,65 @@
+@theme {
+  /* Brand and semantic aliases consumed by apps/components */
+  --color-brand-primary: var(--token-border-brand-default);
+  --color-brand-surface: var(--token-card-bg-default);
+  --color-brand-secondary: var(--token-bg-brand-secondary);
+  --color-text-default: var(--token-text-default);
+  --color-text-secondary: var(--token-text-secondary);
+  --color-surface-default: var(--token-bg-default-default);
+  --color-surface-secondary: var(--token-bg-default-secondary);
+  --color-border-default: var(--token-border-default);
+  --color-status-positive: var(--token-bg-positive);
+  --color-status-warning: var(--token-bg-warning);
+  --color-status-danger: var(--token-bg-danger);
+  --color-card-surface: var(--token-card-bg-default);
+
+  --color-button-primary: var(--token-bg-brand-default);
+  --color-button-primary-text: var(--token-text-brand-on-bg);
+  --color-button-primary-hover: var(--token-bg-brand-default-150);
+  --color-button-primary-press: var(--token-bg-brand-default);
+  --color-button-primary-press-text: var(--token-bg-brand-default-0);
+  --color-button-primary-inactive: #bcbcbc;
+  --color-button-primary-inactive-text: #f2f2f2;
+
+  --color-button-secondary: transparent;
+  --color-button-secondary-hover: color-mix(in srgb, var(--token-bg-default-default) 88%, transparent);
+  --color-button-secondary-press: var(--token-bg-default-default);
+  --color-button-secondary-text: var(--token-bg-brand-default);
+  --color-button-secondary-hover-text: var(--token-bg-brand-default-150);
+  --color-button-secondary-press-text: var(--token-bg-brand-default-50);
+  --color-button-secondary-inactive: #ffffff;
+  --color-button-secondary-inactive-border: #bcbcbc;
+  --color-button-secondary-inactive-text: #bcbcbc;
+
+  --color-button-tertiary: transparent;
+  --color-button-tertiary-hover: color-mix(in srgb, var(--token-bg-default-secondary) 80%, transparent);
+  --color-button-tertiary-press: color-mix(in srgb, var(--token-bg-default-secondary) 100%, transparent);
+  --color-button-tertiary-text: var(--token-bg-brand-default);
+  --color-button-tertiary-hover-text: var(--token-bg-brand-default-150);
+  --color-button-tertiary-press-text: var(--token-bg-brand-default-50);
+  --color-button-tertiary-inactive-text: #bcbcbc;
+
+  --color-brand-sunshine-yellow: var(--token-bg-brand-secondary);
+  --color-momo-blue: var(--token-bg-brand-default);
+  --color-momo-yellow: var(--token-bg-brand-secondary);
+  --color-momo-darkText: var(--token-text-default);
+  --color-momo-bgLight: var(--token-page-bg-secondary);
+
+  --color-momo-chartLine: var(--token-bg-brand-secondary);
+  --color-momo-chartFill: color-mix(in srgb, var(--token-bg-brand-secondary) 75%, transparent);
+
+  --color-momo-sidebarActive: var(--token-bg-brand-default);
+  --color-momo-tableHeaderBg: color-mix(in srgb, var(--token-bg-default-secondary) 50%, transparent);
+  --color-momo-badgePendingText: var(--token-bg-warning);
+  --color-momo-badgePendingBg: color-mix(in srgb, var(--token-bg-warning) 35%, transparent);
+  --color-momo-badgePendingBorder: var(--token-border-warning);
+
+  /* Neo Library semantic aliases */
+  --color-neo-library-background: var(--token-brand-momo-blue);
+  --color-neo-library-gradient-primary: linear-gradient(
+    135deg,
+    var(--token-gradient-primary-start) 0%,
+    var(--token-gradient-primary-middle) 50%,
+    var(--token-gradient-primary-end) 100%
+  );
+}

@@ -4,13 +4,17 @@ import type { ButtonHTMLAttributes, MouseEventHandler } from "react";
 export type ButtonSize = "large" | "small" | "xsmall";
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export type ButtonPlatform = "mobile" | "desktop-web";
+export type ButtonState = "active" | "hover-focus" | "press" | "inactive";
 
-export interface ButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
+export interface ButtonProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  "onClick"
+> {
   label: string;
   platform?: ButtonPlatform;
   size?: ButtonSize;
   variant?: ButtonVariant;
+  state?: ButtonState;
   fullWidth?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
@@ -47,7 +51,7 @@ const sizeLabelClasses: Record<ButtonPlatform, Record<ButtonSize, string>> = {
   },
 };
 
-const variantClasses: Record<ButtonVariant, string> = {
+const variantInteractiveClasses: Record<ButtonVariant, string> = {
   primary:
     "border border-button-primary bg-button-primary text-button-primary-text shadow-momo-sm hover:bg-button-primary-hover active:bg-button-primary-press active:text-button-primary-press-text",
   secondary:
@@ -56,11 +60,48 @@ const variantClasses: Record<ButtonVariant, string> = {
     "border border-transparent bg-button-tertiary text-button-tertiary-text hover:text-button-tertiary-hover-text active:text-button-tertiary-press-text",
 };
 
+const variantStateClasses: Record<
+  ButtonVariant,
+  Record<ButtonState, string>
+> = {
+  primary: {
+    active:
+      "border border-button-primary bg-button-primary text-button-primary-text shadow-momo-sm",
+    "hover-focus":
+      "border border-button-primary bg-button-primary-hover text-button-primary-text shadow-momo-sm",
+    press:
+      "border border-button-primary bg-button-primary-press text-button-primary-press-text shadow-momo-sm",
+    inactive:
+      "border border-button-primary-inactive bg-button-primary-inactive text-button-primary-inactive-text shadow-none",
+  },
+  secondary: {
+    active:
+      "border-2 border-button-secondary bg-button-secondary text-button-secondary-text",
+    "hover-focus":
+      "border-2 border-button-secondary-hover bg-button-secondary-hover text-button-secondary-hover-text shadow-momo-sm",
+    press:
+      "border-[2.4px] border-button-secondary-press bg-button-secondary-press text-button-secondary-press-text",
+    inactive:
+      "border-2 border-button-secondary-inactive-border bg-button-secondary-inactive text-button-secondary-inactive-text shadow-none",
+  },
+  tertiary: {
+    active:
+      "border border-transparent bg-button-tertiary text-button-tertiary-text",
+    "hover-focus":
+      "border border-transparent bg-button-tertiary text-button-tertiary-hover-text",
+    press:
+      "border border-transparent bg-button-tertiary text-button-tertiary-press-text",
+    inactive:
+      "border border-transparent bg-button-tertiary text-button-tertiary-inactive-text shadow-none",
+  },
+};
+
 export function Button({
   label,
   platform = "mobile",
   size = "large",
   variant = "primary",
+  state,
   fullWidth = false,
   disabled = false,
   onClick,
@@ -68,11 +109,22 @@ export function Button({
   type = "button",
   ...rest
 }: Readonly<ButtonProps>) {
+  const computedState: ButtonState =
+    state ?? (disabled ? "inactive" : "active");
+  const useExplicitState = state !== undefined || disabled;
+  const interactiveStateClass = variantInteractiveClasses[variant];
+  const explicitStateClass = variantStateClasses[variant][computedState];
+  const nonActiveStateClass =
+    computedState !== "active" ? "pointer-events-none" : "";
+  const resolvedVariantClass = useExplicitState
+    ? `${explicitStateClass} ${nonActiveStateClass}`
+    : interactiveStateClass;
+
   const classes = [
-    "inline-flex items-center justify-center rounded-full text-center tracking-[0px] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-secondary disabled:cursor-not-allowed disabled:border-border-default disabled:bg-surface-secondary disabled:text-text-secondary disabled:shadow-none disabled:opacity-60",
+    "inline-flex items-center justify-center rounded-full text-center tracking-[0px] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-secondary disabled:cursor-not-allowed",
     sizeContainerClasses[platform][size],
     sizeLabelClasses[platform][size],
-    variantClasses[variant],
+    resolvedVariantClass,
     fullWidth ? "w-full min-w-0" : "w-auto",
     className,
   ]
@@ -83,7 +135,7 @@ export function Button({
     <button
       type={type}
       className={classes}
-      disabled={disabled}
+      disabled={disabled || computedState === "inactive"}
       onClick={onClick}
       {...rest}
     >

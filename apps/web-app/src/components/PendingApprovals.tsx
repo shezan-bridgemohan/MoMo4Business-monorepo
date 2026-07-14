@@ -17,7 +17,7 @@ interface ApprovalRow {
 export default function PendingApprovals({
   activeTab,
   setActiveTab,
-}: PendingApprovalsProps) {
+}: Readonly<PendingApprovalsProps>) {
   // Dummy data arrays for Single Transactions
   const singleData: ApprovalRow[] = [
     {
@@ -111,20 +111,20 @@ export default function PendingApprovals({
   const totalPending = singleData.length + bulkData.length;
 
   return (
-    <div className="space-y-16 pt-10">
+    <div className="space-y-4 pt-2">
       {/* Top Heading with dynamic global count */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-black text-momo-darkText dark:text-white">
+        <h3 className="momo-typo-heading-sm text-momo-blue">
           Pending Approvals
         </h3>
-        <span className="text-[10px] font-bold text-momo-badgePendingText border border-momo-badgePendingBorder px-10 py-2 rounded-full bg-momo-bgLight dark:bg-slate-900">
-          {totalPending} Total Pending Approvals
+        <span className="momo-typo-label-lg text-momo-blue border border-border-default px-3 py-1 rounded-full bg-surface-default">
+          {totalPending} Pending approvals
         </span>
       </div>
 
       {/* Tab Switcher */}
-      <div className="flex items-center justify-between bg-momo-bgLight dark:bg-slate-900 p-4 rounded-momo-input">
-        <div className="flex gap-10 flex-1 max-w-md">
+      <div className="flex items-center justify-between bg-surface-default border border-border-default p-2 rounded-full">
+        <div className="flex gap-2 flex-1 max-w-md">
           {["single", "bulk"].map((tab) => {
             const count =
               tab === "single" ? singleData.length : bulkData.length;
@@ -132,18 +132,18 @@ export default function PendingApprovals({
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`flex-1 flex items-center justify-center gap-10 py-10 rounded-momo-input text-xs font-bold transition-all duration-300 ease-in-out ${
+                className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full momo-typo-label-lg transition-all duration-300 ease-in-out ${
                   activeTab === tab
-                    ? "bg-white dark:bg-slate-800 text-momo-blue dark:text-white shadow-momo-sm scale-[1.01]"
-                    : "text-slate-400 hover:text-momo-blue/70 dark:hover:text-slate-200"
+                    ? "bg-surface-secondary text-momo-blue shadow-momo-sm"
+                    : "text-text-secondary hover:text-momo-blue/70"
                 }`}
               >
                 {tab === "single" ? "Single Transactions" : "Bulk Transactions"}{" "}
                 <span
-                  className={`w-16 h-16 rounded-full text-white text-[9px] flex items-center justify-center transition-all duration-300 ${
+                  className={`w-20 h-20 rounded-full momo-typo-label-md flex items-center justify-center transition-all duration-300 ${
                     activeTab === tab
-                      ? "bg-amber-500 scale-110 animate-pulse"
-                      : "bg-slate-300 dark:bg-slate-700"
+                      ? "bg-momo-yellow text-momo-blue"
+                      : "bg-surface-secondary text-text-secondary"
                   }`}
                 >
                   {count}
@@ -152,13 +152,13 @@ export default function PendingApprovals({
             );
           })}
         </div>
-        <button className="bg-momo-blue text-white text-xs font-bold px-20 py-6 rounded-momo-input mx-4 hover:opacity-95 shadow-momo-sm transition-all">
+        <button className="bg-momo-blue text-white momo-typo-label-lg px-4 py-2 rounded-full mx-2 hover:opacity-95 shadow-momo-sm transition-all">
           View All
         </button>
       </div>
 
       {/* Table Header Structure Grid */}
-      <div className="bg-momo-tableHeaderBg dark:bg-slate-900/50 rounded-momo-input p-16 grid grid-cols-6 gap-10 text-center text-xs font-bold text-momo-blue dark:text-slate-300 border border-momo-light">
+      <div className="bg-surface-default rounded-xl px-4 py-3 grid grid-cols-6 gap-3 text-center momo-typo-label-lg text-momo-blue border border-border-default">
         <div>Date Created</div>
         <div>Reference</div>
         <div>Transaction ID</div>
@@ -168,34 +168,34 @@ export default function PendingApprovals({
       </div>
 
       {/* Dynamic Rows Container Wrapper */}
-      <div className="space-y-6 max-h-[320px] overflow-y-auto pr-2">
+      <div className="space-y-2 max-h-[320px] overflow-y-auto pr-1">
         {currentRows.length > 0 ? (
-          currentRows.map((row, idx) => (
+          currentRows.map((row) => (
             <div
-              key={idx}
-              className="bg-white dark:bg-slate-900 p-16 grid grid-cols-6 gap-10 text-center text-xs font-medium text-slate-600 dark:text-slate-300 rounded-momo-input border-momo-light shadow-momo-sm hover:border-momo-blue/30 transition-all duration-200"
+              key={row.txId}
+              className="bg-surface-default px-4 py-3 grid grid-cols-6 gap-3 text-center momo-typo-label-lg text-text-secondary rounded-xl border border-border-default shadow-momo-sm hover:border-momo-blue/30 transition-all duration-200"
             >
-              <div className="text-slate-400 font-mono">{row.date}</div>
-              <div className="font-bold tracking-tight text-momo-darkText dark:text-white">
+              <div className="text-text-secondary">{row.date}</div>
+              <div className="tracking-tight text-text-default">
                 {row.reference}
               </div>
-              <div className="text-slate-400 font-mono text-[11px] truncate">
+              <div className="text-text-secondary text-[11px] truncate">
                 {row.txId}
               </div>
               <div className="truncate">{row.type}</div>
               <div>
-                <span className="px-10 py-2 rounded-full text-[10px] font-bold bg-amber-50 dark:bg-amber-950/40 text-amber-600 border border-amber-200/50">
+                <span className="px-2 py-1 rounded-full text-[10px] bg-momo-badgePendingBg text-momo-badgePendingText border border-momo-badgePendingBorder">
                   {row.status}
                 </span>
               </div>
-              <div className="font-black text-momo-darkText dark:text-white tracking-tight">
+              <div className="text-text-default tracking-tight">
                 {row.amount}
               </div>
             </div>
           ))
         ) : (
-          <div className="bg-momo-bgLight/20 dark:bg-slate-900/20 border border-dashed border-slate-200 dark:border-slate-800 rounded-momo-card p-24 text-center text-xs text-slate-400 font-medium flex items-center justify-center gap-10">
-            <Info className="w-14 h-14" /> No pending approvals.
+          <div className="bg-surface-secondary border border-dashed border-border-default rounded-momo-card p-6 text-center momo-typo-label-md text-text-secondary flex items-center justify-center gap-2">
+            <Info className="w-4 h-4" /> No pending approvals.
           </div>
         )}
       </div>

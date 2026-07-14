@@ -1,0 +1,8 @@
+@theme {
+  --shadow-momo-sm: 0 2px 8px -2px rgba(0, 43, 73, 0.05), 0 1px 3px -1px rgba(0, 43, 73, 0.03);
+  --shadow-momo-md: 0 12px 20px -6px rgba(0, 43, 73, 0.08), 0 4px 8px -2px rgba(0, 43, 73, 0.04);
+  --shadow-momo-lg: 0 20px 32px -8px rgba(0, 43, 73, 0.12), 0 8px 16px -4px rgba(0, 43, 73, 0.06);
+
+  --border-momo-light: 1px solid color-mix(in srgb, var(--token-bg-brand-default) 8%, transparent);
+  --border-momo-focus: 2px solid var(--token-bg-brand-default);
+}

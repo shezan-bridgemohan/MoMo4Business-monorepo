@@ -1,6 +1,33 @@
 @import "tailwindcss";
 @import "@shared/tokens/index.css";
 
+@font-face {
+	font-family: "MTN Brighter Sans";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	  src: url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Regular.woff2") format("woff2"),
+		  url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Regular.woff") format("woff");
+}
+
+@font-face {
+	font-family: "MTN Brighter Sans";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	  src: url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Medium.woff2") format("woff2"),
+		  url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Medium.woff") format("woff");
+}
+
+@font-face {
+	font-family: "MTN Brighter Sans";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	  src: url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Bold.woff2") format("woff2"),
+		  url("@shared/tokens/assets/fonts/mtn-brighter-sans/MTN-Brighter-Sans-Bold.woff") format("woff");
+}
+
 @source "../../../packages/ui-components/src/**/*.tsx";
 @source "../../../packages/ui-components/src/**/*.ts";
 @source "../../../packages/ui-components/src/**/*.jsx";

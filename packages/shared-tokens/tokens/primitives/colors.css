@@ -1,0 +1,158 @@
+:root {
+  /* Light mode token values from Figma */
+  --token-bg-default-default: #ffffff;
+  --token-bg-default-secondary: #f2f2f2;
+  --token-bg-default-tertiary: #e8e8e8;
+  --token-bg-brand-default-0: #ccdce3;
+  --token-bg-brand-default-50: #4d849c;
+  --token-bg-brand-default: #004f71;
+  --token-bg-brand-default-150: #003654;
+  --token-bg-brand-secondary: #ffcb05;
+  --token-bg-brand-tertiary: #ffffff;
+  --token-bg-positive: #0faf4b;
+  --token-bg-warning: #ff9400;
+  --token-bg-danger: #ed3434;
+  --token-bg-inactive: #dadada;
+
+  --token-text-default: #000000;
+  --token-text-secondary: #5f5f5f;
+  --token-text-tertiary: #afafaf;
+  --token-text-on-bg-default: #f2f2f2;
+  --token-text-on-bg-secondary: #f2f2f2;
+  --token-text-on-bg-tertiary: #3a3a3a;
+  --token-text-brand-default: #004f71;
+  --token-text-brand-secondary: #ffcb05;
+  --token-text-brand-on-bg: #ffffff;
+
+  --token-border-default: #f2f2f2;
+  --token-border-secondary: #e8e8e8;
+  --token-border-tertiary: #afafaf;
+  --token-border-brand-default: #004f71;
+  --token-border-brand-secondary: #ffcb05;
+  --token-border-positive: #0faf4b;
+  --token-border-warning: #ff9400;
+  --token-border-danger: #ed3434;
+  --token-border-inactive: #afafaf;
+
+  --token-card-bg-default: #ffffff;
+  --token-card-bg-secondary: #ffffff;
+  --token-card-bg-tertiary: #f2f2f2;
+  --token-card-border-default: #e8e8e8;
+  --token-card-border-secondary: #2e2e2e;
+  --token-card-border-tertiary: #4a4a4a;
+  --token-card-text-default: #7f7f7f;
+
+  --token-page-bg-default: #ffffff;
+  --token-page-bg-secondary: #f2f2f2;
+
+  /* Neo Library brand aliases mapped from Figma color primitives */
+  --token-brand-momo-blue: var(--token-bg-brand-default);
+  --token-brand-momo-dark-blue: var(--token-bg-brand-default-150);
+  --token-brand-momo-light-blue: var(--token-bg-brand-default-50);
+  --token-brand-momo-extra-light-blue: var(--token-bg-brand-default-0);
+  --token-brand-sunshine-yellow: var(--token-bg-brand-secondary);
+  --token-brand-green: var(--token-bg-positive);
+  --token-brand-green-40: #9fdfb7;
+
+  /* Neo Library gradients */
+  --token-gradient-primary-start: var(--token-brand-momo-light-blue);
+  --token-gradient-primary-middle: var(--token-brand-momo-blue);
+  --token-gradient-primary-end: var(--token-brand-momo-dark-blue);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --token-bg-default-default: #2e2e2e;
+    --token-bg-default-secondary: #3a3a3a;
+    --token-bg-default-tertiary: #4a4a4a;
+    --token-bg-brand-default-0: #004f71;
+    --token-bg-brand-default-50: #4d849c;
+    --token-bg-brand-default: #004f71;
+    --token-bg-brand-default-150: #003654;
+    --token-bg-brand-secondary: #ffcb05;
+    --token-bg-brand-tertiary: #2e2e2e;
+    --token-bg-positive: #3fbf6f;
+    --token-bg-warning: #ff9400;
+    --token-bg-danger: #ed3434;
+    --token-bg-inactive: #afafaf;
+
+    --token-text-default: #f2f2f2;
+    --token-text-secondary: #bcbcbc;
+    --token-text-tertiary: #dadada;
+    --token-text-on-bg-default: #222222;
+    --token-text-on-bg-secondary: #2e2e2e;
+    --token-text-on-bg-tertiary: #3a3a3a;
+    --token-text-brand-default: #004f71;
+    --token-text-brand-secondary: #ffcb05;
+    --token-text-brand-on-bg: #f2f2f2;
+
+    --token-border-default: #4a4a4a;
+    --token-border-secondary: #7f7f7f;
+    --token-border-tertiary: #bcbcbc;
+    --token-border-brand-default: #4d849c;
+    --token-border-brand-secondary: #ffcb05;
+    --token-border-positive: #0faf4b;
+    --token-border-warning: #ff9400;
+    --token-border-danger: #f48585;
+    --token-border-inactive: #afafaf;
+
+    --token-card-bg-default: #2e2e2e;
+    --token-card-bg-secondary: #3a3a3a;
+    --token-card-bg-tertiary: #4a4a4a;
+    --token-card-border-default: #2e2e2e;
+    --token-card-border-secondary: #bcbcbc;
+    --token-card-border-tertiary: #9a9a9a;
+    --token-card-text-default: #f2f2f2;
+
+    --token-page-bg-default: #222222;
+    --token-page-bg-secondary: #000000;
+  }
+}
+
+[data-theme="dark"],
+.dark {
+  --token-bg-default-default: #2e2e2e;
+  --token-bg-default-secondary: #3a3a3a;
+  --token-bg-default-tertiary: #4a4a4a;
+  --token-bg-brand-default-0: #004f71;
+  --token-bg-brand-default-50: #4d849c;
+  --token-bg-brand-default: #004f71;
+  --token-bg-brand-default-150: #003654;
+  --token-bg-brand-secondary: #ffcb05;
+  --token-bg-brand-tertiary: #2e2e2e;
+  --token-bg-positive: #3fbf6f;
+  --token-bg-warning: #ff9400;
+  --token-bg-danger: #ed3434;
+  --token-bg-inactive: #afafaf;
+
+  --token-text-default: #f2f2f2;
+  --token-text-secondary: #bcbcbc;
+  --token-text-tertiary: #dadada;
+  --token-text-on-bg-default: #222222;
+  --token-text-on-bg-secondary: #2e2e2e;
+  --token-text-on-bg-tertiary: #3a3a3a;
+  --token-text-brand-default: #004f71;
+  --token-text-brand-secondary: #ffcb05;
+  --token-text-brand-on-bg: #f2f2f2;
+
+  --token-border-default: #4a4a4a;
+  --token-border-secondary: #7f7f7f;
+  --token-border-tertiary: #bcbcbc;
+  --token-border-brand-default: #4d849c;
+  --token-border-brand-secondary: #ffcb05;
+  --token-border-positive: #0faf4b;
+  --token-border-warning: #ff9400;
+  --token-border-danger: #f48585;
+  --token-border-inactive: #afafaf;
+
+  --token-card-bg-default: #2e2e2e;
+  --token-card-bg-secondary: #3a3a3a;
+  --token-card-bg-tertiary: #4a4a4a;
+  --token-card-border-default: #2e2e2e;
+  --token-card-border-secondary: #bcbcbc;
+  --token-card-border-tertiary: #9a9a9a;
+  --token-card-text-default: #f2f2f2;
+
+  --token-page-bg-default: #222222;
+  --token-page-bg-secondary: #000000;
+}

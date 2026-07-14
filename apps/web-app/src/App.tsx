@@ -8,11 +8,33 @@ import ActionButton from "./components/ActionButton";
 import { CreditCard, FileText, HandCoins, Store } from "lucide-react";
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    const root = document.documentElement;
+    const explicitTheme = root.dataset.theme;
+
+    if (explicitTheme === "dark") {
+      return true;
+    }
+    if (explicitTheme === "light") {
+      return false;
+    }
+
+    if (root.classList.contains("dark")) {
+      return true;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
   const [activeTab, setActiveTab] = useState("single");
 
   // Synchronize state with HTML element class list
   useEffect(() => {
+    document.documentElement.dataset.theme = darkMode ? "dark" : "light";
+
     if (darkMode) {
       document.documentElement.classList.add("dark");
     } else {
@@ -28,7 +50,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-momo-bgLight dark:bg-slate-950 flex flex-col font-sans text-slate-800 dark:text-slate-200 transition-colors duration-200">
+    <div className="min-h-screen bg-surface-secondary flex flex-col font-sans text-text-default transition-colors duration-200">
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
 
       {/* Main Layout Container - Sidebar pinned left, content panel takes the rest */}
@@ -39,9 +61,11 @@ export default function App() {
           - flex-1: pushes this panel to fill the entire remaining right-hand viewport space.
           - items-center: horizontally centers the child components inside this panel.
         */}
-        <main className="flex-1 flex flex-col items-center p-32 animate-momo-fade-in">
+        <main className="flex-1 flex flex-col items-center p-8 md:p-10 animate-momo-fade-in">
           {/* Centered bounding box enforcing consistency across layout segments */}
-          <div className="w-full max-w-6xl space-y-24">
+          <div className="w-full max-w-310 space-y-8">
+            <h1 className="momo-typo-heading-sm text-momo-blue">Accounts</h1>
+
             <BalanceCard title="Total Balance" />
 
             <AccountDashboard />
@@ -51,16 +75,20 @@ export default function App() {
               setActiveTab={setActiveTab}
             />
 
-            <div className="flex justify-center gap-16 pt-24">
-              {shortcuts.map((btn, idx) => (
-                <ActionButton key={idx} label={btn.label} icon={btn.icon} />
+            <div className="flex justify-center gap-4 pt-4">
+              {shortcuts.map((btn) => (
+                <ActionButton
+                  key={btn.label}
+                  label={btn.label}
+                  icon={btn.icon}
+                />
               ))}
             </div>
           </div>
         </main>
       </div>
 
-      <footer className="text-[10px] text-slate-400 self-end p-10 pr-16 bg-transparent select-none">
+      <footer className="momo-typo-label-sm-medium text-text-secondary self-end px-6 py-4 bg-transparent select-none">
         MoMo-Business-Web-v4.0.0
       </footer>
     </div>

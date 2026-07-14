@@ -122,7 +122,7 @@ export default function AccountDashboard() {
       >
         <div className="flex items-start justify-between">
           <div>
-            <p className="momo-typo-label-md text-text-secondary">
+            <p className="momo-typo-body-md text-text-secondary">
               {activeAccount.accountName}
             </p>
             <h2 className="momo-typo-heading-md text-text-default mt-1 flex items-center gap-2">

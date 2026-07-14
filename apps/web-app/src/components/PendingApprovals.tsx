@@ -1,3 +1,4 @@
+import { Button } from "@shared/ui-components";
 import { Info } from "lucide-react";
 
 interface PendingApprovalsProps {
@@ -25,7 +26,7 @@ export default function PendingApprovals({
       reference: "REF-9921A",
       txId: "TXN8829102",
       type: "Utility Bill",
-      status: "Awaiting Sign",
+      status: "Approved",
       amount: "UGX 45,000",
     },
     {
@@ -33,7 +34,7 @@ export default function PendingApprovals({
       reference: "REF-1092B",
       txId: "TXN0021983",
       type: "Supplier Pay",
-      status: "Pending Otp",
+      status: "Declined",
       amount: "UGX 1,200,000",
     },
     {
@@ -41,24 +42,24 @@ export default function PendingApprovals({
       reference: "REF-7726X",
       txId: "TXN9921045",
       type: "Wallet Transfer",
-      status: "Awaiting Sign",
+      status: "Process",
       amount: "UGX 15,000",
-    },
-    {
-      date: "2026-07-04",
-      reference: "REF-3112M",
-      txId: "TXN4456129",
-      type: "Airtime Purchase",
-      status: "Awaiting Sign",
-      amount: "UGX 5,000",
     },
     {
       date: "2026-07-04",
       reference: "REF-8812K",
       txId: "TXN1109438",
       type: "Salary Advance",
-      status: "Verification",
+      status: "Approved",
       amount: "UGX 350,000",
+    },
+    {
+      date: "2026-07-04",
+      reference: "REF-3112M",
+      txId: "TXN4456129",
+      type: "Airtime Purchase",
+      status: "Process",
+      amount: "UGX 5,000",
     },
   ];
 
@@ -69,7 +70,7 @@ export default function PendingApprovals({
       reference: "BULK-JULY-A",
       txId: "BLK00291",
       type: "Payroll (42 Recipients)",
-      status: "Processing Match",
+      status: "Process",
       amount: "UGX 18,450,000",
     },
     {
@@ -77,7 +78,7 @@ export default function PendingApprovals({
       reference: "BULK-VENDOR-X",
       txId: "BLK00292",
       type: "Vendor Clearance (5 files)",
-      status: "Awaiting Approval",
+      status: "Declined",
       amount: "UGX 9,100,000",
     },
     {
@@ -85,7 +86,7 @@ export default function PendingApprovals({
       reference: "BULK-METER-B",
       txId: "BLK00293",
       type: "Umeme Bulk Power",
-      status: "Awaiting Approval",
+      status: "Approved",
       amount: "UGX 4,500,000",
     },
     {
@@ -93,7 +94,7 @@ export default function PendingApprovals({
       reference: "BULK-TAX-Q2",
       txId: "BLK00294",
       type: "URA Statutory Remit",
-      status: "Compliance Review",
+      status: "Process",
       amount: "UGX 32,150,000",
     },
     {
@@ -101,7 +102,7 @@ export default function PendingApprovals({
       reference: "BULK-COMM-07",
       txId: "BLK00295",
       type: "Agent Commissions",
-      status: "Awaiting Approval",
+      status: "Approved",
       amount: "UGX 7,800,000",
     },
   ];
@@ -109,6 +110,24 @@ export default function PendingApprovals({
   // Dynamically switch active rows depending on selection state
   const currentRows = activeTab === "single" ? singleData : bulkData;
   const totalPending = singleData.length + bulkData.length;
+
+  const getStatusBadgeClass = (status: string) => {
+    const normalized = status.trim().toLowerCase();
+
+    if (normalized === "approved") {
+      return "bg-status-positive/15 text-status-positive border-status-positive/40";
+    }
+
+    if (normalized === "declined") {
+      return "bg-status-danger/15 text-status-danger border-status-danger/40";
+    }
+
+    if (normalized.startsWith("process")) {
+      return "bg-momo-blue/15 text-momo-blue dark:text-white border-momo-blue/40";
+    }
+
+    return "bg-momo-badgePendingBg text-momo-badgePendingText border-momo-badgePendingBorder";
+  };
 
   return (
     <div className="space-y-(--spacing-momo-container-gap) pt-(--spacing-momo-element-spacing)">
@@ -152,9 +171,13 @@ export default function PendingApprovals({
             );
           })}
         </div>
-        <button className="bg-momo-blue text-white momo-typo-label-lg px-4 py-2 rounded-full mx-2 hover:opacity-95 shadow-momo-sm transition-all">
-          View All
-        </button>
+          <Button
+                    label="View all"
+                    platform="desktop-web"
+                    size="xsmall"
+                    variant="primary"
+                    className="normal-case"
+                  />
       </div>
 
       {/* Table Header Structure Grid */}
@@ -183,8 +206,10 @@ export default function PendingApprovals({
                 {row.txId}
               </div>
               <div className="truncate">{row.type}</div>
-              <div>
-                <span className="px-2 py-1 rounded-full text-[10px] bg-momo-badgePendingBg text-momo-badgePendingText border border-momo-badgePendingBorder">
+              <div className="flex items-center justify-center" >
+                <span
+                  className={`px-10 py-1 rounded-full text-[10px] border ${getStatusBadgeClass(row.status)}`}
+                >
                   {row.status}
                 </span>
               </div>

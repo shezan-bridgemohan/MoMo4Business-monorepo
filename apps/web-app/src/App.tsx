@@ -50,7 +50,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-surface-secondary flex flex-col font-sans text-text-default transition-colors duration-200">
+    <div className="min-h-screen bg-surface-default flex flex-col font-sans text-text-default transition-colors duration-200">
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
 
       {/* Main Layout Container - Sidebar pinned left, content panel takes the rest */}
@@ -61,7 +61,7 @@ export default function App() {
           - flex-1: pushes this panel to fill the entire remaining right-hand viewport space.
           - items-center: horizontally centers the child components inside this panel.
         */}
-        <main className="flex-1 flex flex-col items-center p-8 md:p-10 animate-momo-fade-in">
+        <main className="flex-1 ml-[var(--layout-shell-nav-open-width)] flex flex-col items-center p-8 md:p-10 animate-momo-fade-in dark:bg-zinc-800 transition-colors duration-200">
           {/* Centered bounding box enforcing consistency across layout segments */}
           <div className="w-full max-w-310 space-y-8">
             <h1 className="momo-typo-heading-sm text-momo-blue dark:text-white">Accounts</h1>

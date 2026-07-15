@@ -1,50 +1,49 @@
-import type { MouseEventHandler } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 
-export interface CardProps {
-  title: string;
-  description: string;
-  highlighted: boolean;
-  actionLabel: string;
-  onActionButtonClick?: MouseEventHandler<HTMLButtonElement>;
+export type CardVariant =
+  | "solid-no-shadow"
+  | "solid-with-shadow"
+  | "solid-border-default"
+  | "solid-border-selected"
+  | "glass";
+
+export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, "children"> {
+  children?: ReactNode;
+  variant?: CardVariant;
+  minHeight?: number;
+  className?: string;
 }
 
+function cn(...classes: Array<string | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const baseCardClasses =
+  "rounded-[10px] p-[20px] min-w-[280px] bg-[color:var(--token-card-bg-default)] transition-colors duration-200";
+
+const variantClasses: Record<CardVariant, string> = {
+  "solid-no-shadow": "border border-transparent",
+  "solid-with-shadow": "border border-transparent shadow-momo-sm",
+  "solid-border-default": "border border-[color:var(--token-card-border-default)]",
+  "solid-border-selected": "border border-momo-blue",
+  glass:
+    "border border-white/40 bg-white/15 backdrop-blur-[12px] shadow-[0_8px_24px_rgba(0,0,0,0.08)]",
+};
+
 export function Card({
-  title,
-  description,
-  highlighted,
-  actionLabel,
-  onActionButtonClick,
+  children,
+  variant = "solid-no-shadow",
+  minHeight = 110,
+  className,
+  ...rest
 }: Readonly<CardProps>) {
   return (
     <section
-      className={[
-        "flex h-full flex-col rounded-2xl border p-6 shadow-sm transition",
-        highlighted
-          ? "border-brand-primary bg-brand-surface"
-          : "border-slate-200 bg-white",
-      ].join(" ")}
+      className={cn(baseCardClasses, variantClasses[variant], className)}
+      style={{ minHeight, ...(rest.style ?? {}) }}
+      {...rest}
     >
-      <div className="space-y-3">
-        <h3 className="text-lg font-semibold tracking-tight text-slate-900">
-          {title}
-        </h3>
-        <p className="text-sm leading-6 text-slate-600">{description}</p>
-      </div>
-
-      <div className="mt-6 flex items-center justify-end">
-        <button
-          type="button"
-          onClick={onActionButtonClick}
-          className={[
-            "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition",
-            highlighted
-              ? "bg-brand-primary text-white hover:opacity-90"
-              : "bg-slate-900 text-white hover:bg-slate-700",
-          ].join(" ")}
-        >
-          {actionLabel}
-        </button>
-      </div>
+      {children}
     </section>
   );
 }

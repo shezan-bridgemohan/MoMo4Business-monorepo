@@ -1,18 +1,17 @@
-import { useState, type MouseEvent } from "react";
+import { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  ChevronDown,
   ChevronLeft,
   FileCheck2,
   FileText,
   HandCoins,
   Headset,
-  Home,
   Landmark,
   LogOut,
   ShieldCheck,
   User,
 } from "lucide-react";
+import { WebNavigationItem } from "@shared/ui-components";
 
 interface MenuSection {
   key: string;
@@ -51,23 +50,13 @@ export default function Sidebar() {
     Object.fromEntries(menuSections.map(({ key }) => [key, false])),
   );
 
-  const toggleMenu = (menuKey: string, e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    // Auto-expand the sidebar if a user tries to open a menu while minimized
-    if (isCollapsed) {
-      setIsCollapsed(false);
-    }
-    setOpenMenus((prev) => ({
-      ...prev,
-      [menuKey]: !prev[menuKey],
-    }));
-  };
-
   return (
     <aside
       /* Dynamic dynamic layout configurations width: w-64 vs w-20 */
-      className={`bg-surface-default flex flex-col justify-between p-20 relative border-r border-border-default transition-all duration-300 ease-in-out ${
-        isCollapsed ? "w-[80px]" : "w-[270px]"
+      className={`fixed left-0 top-(--layout-shell-header-height) h-[calc(100vh-var(--layout-shell-header-height))] z-40 bg-surface-default flex flex-col justify-between p-20 border-r border-border-default transition-all duration-300 ease-in-out overflow-visible ${
+        isCollapsed
+          ? "w-(--layout-shell-nav-compact-width)"
+          : "w-(--layout-shell-nav-open-width)"
       }`}
     >
       {/* Flight Control Toggle button: added active onClick behavior and indicator rotation dynamics */}
@@ -80,62 +69,42 @@ export default function Sidebar() {
         <ChevronLeft className="w-20 h-20" />
       </button>
 
-      <div className="space-y-6 overflow-x-hidden">
-        <nav className="space-y-4">
-          {/* Static Home Link */}
-          <button
-            type="button"
-            className="flex items-center bg-momo-sidebarActive text-white dark:text-momo-blue px-4 py-3 rounded-xl momo-typo-label-lg h-12"
-          >
-            <div className="flex items-center gap-3 min-w-max">
-              <Home className="w-20 h-20" />
-              <span
-                className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
-              >
-                Home
-              </span>
-            </div>
-          </button>
-
+      <div className="flex-1 min-h-0 space-y-(--spacing-momo-element-spacing) overflow-visible">
+        <nav className="space-y-10">
           {/* Collapsible Dropdown Sections */}
           {menuSections.map((section) => {
             const isOpen = !!openMenus[section.key];
             const Icon = section.icon;
 
             return (
-              <div key={section.key} className="flex flex-col my-20">
-                <button
-                  onClick={(e) => toggleMenu(section.key, e)}
-                  className={`flex items-center justify-between w-full text-momo-blue dark:text-white px-4 py-3 hover:bg-surface-secondary rounded-xl momo-typo-body-md transition-colors text-left h-12 ${
-                    isOpen && !isCollapsed ? "bg-surface-secondary" : ""
-                  }`}
-                >
-                  <div className="flex items-center gap-3 min-w-max">
-                    <Icon className="w-20 h-20" />
-                    <span
-                      className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
-                    >
-                      {section.label}
-                    </span>
-                  </div>
-                  <span
-                    className={`text-[10px] opacity-60 transition-all duration-200 ${
-                      isCollapsed ? "scale-0 opacity-0" : ""
-                    } ${isOpen ? "rotate-180 text-momo-blue dark:text-white" : ""}`}
-                  >
-                    <ChevronDown className="w-20 h-20" />
-                  </span>
-                </button>
+              <div key={section.key} className="flex flex-col my-24">
+                <WebNavigationItem
+                  label={section.label}
+                  icon={<Icon className="w-20 h-20" />}
+                  hasChevron
+                  isChevronOpen={isOpen}
+                  isCollapsed={isCollapsed}
+                  isActive={isOpen && !isCollapsed}
+                  onClick={() => {
+                    if (isCollapsed) {
+                      setIsCollapsed(false);
+                    }
+                    setOpenMenus((prev) => ({
+                      ...prev,
+                      [section.key]: !prev[section.key],
+                    }));
+                  }}
+                />
 
                 {/* Animated Dropdown Menu Panel Container: Hidden natively when side status is collapsed */}
                 <div
                   className={`grid transition-all duration-200 ease-in-out pl-10 ${
                     isOpen && !isCollapsed
-                      ? "grid-rows-[1fr] opacity-100 my-4"
+                      ? "grid-rows-[1fr] opacity-100 my-10"
                       : "grid-rows-[0fr] opacity-0 overflow-hidden"
                   }`}
                 >
-                  <div className="overflow-hidden space-y-4">
+                  <div className="overflow-hidden space-y-10 pb-2">
                     {section.items.map((subItem) => (
                       <button
                         key={`${section.key}-${subItem}`}
@@ -152,19 +121,11 @@ export default function Sidebar() {
           })}
 
           {/* Static Profile Link */}
-          <button
-            type="button"
-            className="flex items-center text-text-default px-4 py-3 hover:bg-surface-secondary rounded-xl momo-typo-label-lg transition-colors h-12"
-          >
-            <div className="flex items-center gap-3 min-w-max">
-              <User className="w-20 h-20" />
-              <span
-                className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
-              >
-                Profile
-              </span>
-            </div>
-          </button>
+          <WebNavigationItem
+            label="Profile"
+            icon={<User className="w-20 h-20" />}
+            isCollapsed={isCollapsed}
+          />
         </nav>
       </div>
 
@@ -186,32 +147,21 @@ export default function Sidebar() {
           const Icon = item.icon;
 
           return (
-            <button
+            <WebNavigationItem
               key={item.key}
-              type="button"
-              className="flex items-center gap-3 hover:underline min-w-max"
-            >
-              <Icon className="w-20 h-20" />
-              <span
-                className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
-              >
-                {item.label}
-              </span>
-            </button>
+              label={item.label}
+              icon={<Icon className="w-20 h-20" />}
+              isCollapsed={isCollapsed}
+            />
           );
         })}
 
-        <button
-          type="button"
-          className="flex items-center gap-3 hover:underline text-status-danger pt-2 h-8 min-w-max"
-        >
-          <LogOut className="w-20 h-20" />
-          <span
-            className={`transition-opacity duration-200 ${isCollapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"}`}
-          >
-            Logout
-          </span>
-        </button>
+        <WebNavigationItem
+          label="Logout"
+          icon={<LogOut className="w-20 h-20" />}
+          isCollapsed={isCollapsed}
+          className="text-status-danger hover:text-status-danger"
+        />
       </div>
     </aside>
   );

@@ -126,11 +126,19 @@ export const HighlightedSecondary: Story = {
 export const Matrix: Story = {
   name: "Spec Matrix",
   render: (args) => (
-    <div className="space-y-10 p-6">
+    <div className="space-y-10 p-6 text-text-default">
+      <div className="space-y-2">
+        <h2 className="momo-typo-heading-sm text-momo-blue dark:text-white">
+          Button Spec Matrix
+        </h2>
+        <p className="momo-typo-label-md text-text-secondary">
+          Platform, size, variant and state combinations aligned to the Neo Library button specification.
+        </p>
+      </div>
       {(Object.keys(platformSizes) as Array<"mobile" | "desktop-web">).map(
         (platform) => (
           <section key={platform} className="space-y-6">
-            <h3 className="text-base font-semibold uppercase tracking-wide text-momo-blue">
+            <h3 className="momo-typo-label-sm-medium uppercase tracking-wide text-text-secondary">
               {platform}
             </h3>
             {platformSizes[platform].map((size) =>
@@ -146,13 +154,21 @@ export const Matrix: Story = {
 export const PlacementExamples: Story = {
   name: "Placement Examples",
   render: (args) => (
-    <div className="max-w-md space-y-4 p-6">
+    <div className="max-w-md space-y-4 p-6 text-text-default">
+      <div className="space-y-2">
+        <h2 className="momo-typo-heading-sm text-momo-blue dark:text-white">
+          Button Placement Examples
+        </h2>
+        <p className="momo-typo-label-md text-text-secondary">
+          Practical button groupings for action bars and card-level interactions.
+        </p>
+      </div>
       <div className="rounded-xl border border-border-default bg-card-surface p-4">
-        <p className="mb-4 text-sm text-momo-blue">Single primary action</p>
+        <p className="mb-4 momo-typo-label-md text-momo-blue dark:text-white">Single primary action</p>
         <Button {...args} platform="mobile" fullWidth />
       </div>
       <div className="rounded-xl border border-border-default bg-card-surface p-4">
-        <p className="mb-4 text-sm text-momo-yellow">Primary + secondary actions</p>
+        <p className="mb-4 momo-typo-label-md text-momo-yellow">Primary + secondary actions</p>
         <div className="flex gap-3">
           <Button {...args} platform="mobile" fullWidth />
           <Button {...args} platform="mobile" fullWidth variant="secondary" />

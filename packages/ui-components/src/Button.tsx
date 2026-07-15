@@ -56,7 +56,7 @@ const variantInteractiveClasses: Record<ButtonVariant, string> = {
   secondary:
     "border-2 border-button-secondary bg-button-secondary text-button-secondary-text hover:border-button-secondary-hover hover:bg-button-secondary-hover hover:text-button-secondary-hover-text active:border-[2.4px] active:border-button-secondary-press active:bg-button-secondary-press active:text-button-secondary-press-text",
   tertiary:
-    "border border-transparent bg-button-tertiary text-button-tertiary-text hover:text-button-tertiary-hover-text active:text-button-tertiary-press-text",
+    "border border-button-tertiary-text bg-button-tertiary text-button-tertiary-text hover:border-button-tertiary-hover-text hover:text-button-tertiary-hover-text active:border-button-tertiary-press-text active:text-button-tertiary-press-text",
 };
 
 const variantStateClasses: Record<
@@ -85,13 +85,13 @@ const variantStateClasses: Record<
   },
   tertiary: {
     active:
-      "border border-transparent bg-button-tertiary text-button-tertiary-text",
+      "border border-button-tertiary-text bg-button-tertiary text-button-tertiary-text",
     "hover-focus":
-      "border border-transparent bg-button-tertiary text-button-tertiary-hover-text",
+      "border border-button-tertiary-hover-text bg-button-tertiary text-button-tertiary-hover-text",
     press:
-      "border border-transparent bg-button-tertiary text-button-tertiary-press-text",
+      "border border-button-tertiary-press-text bg-button-tertiary text-button-tertiary-press-text",
     inactive:
-      "border border-transparent bg-button-tertiary text-button-tertiary-inactive-text shadow-none",
+      "border border-button-tertiary-inactive-text bg-button-tertiary text-button-tertiary-inactive-text shadow-none",
   },
 };
 

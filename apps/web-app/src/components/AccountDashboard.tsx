@@ -1,13 +1,11 @@
 import { useState } from "react";
 import {
-  ArrowDownLeft,
-  ArrowUpRight,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   Eye,
 } from "lucide-react";
-import { Button } from "@shared/ui-components";
+import { TransactionsQuickView } from "@shared/ui-components";
 
 interface Transaction {
   direction: "in" | "out";
@@ -114,11 +112,11 @@ export default function AccountDashboard() {
     slideDirection === "next" ? "animate-slide-next" : "animate-slide-prev";
 
   return (
-    <div className="bg-surface-default px-[var(--layout-content-padding-mobile)] md:px-[var(--layout-content-padding-tablet)] xl:px-[var(--layout-content-padding-desktop)] py-[var(--spacing-momo-card-padding)] rounded-[14px] border border-border-default shadow-momo-sm grid grid-cols-1 xl:grid-cols-3 gap-[var(--spacing-momo-container-gap)] relative transition-colors overflow-hidden">
+    <div className="bg-surface-default px-(--layout-content-padding-mobile) md:px-(--layout-content-padding-tablet) xl:px-(--layout-content-padding-desktop) py-(--spacing-momo-card-padding) rounded-[14px] border border-border-default shadow-momo-sm grid grid-cols-1 xl:grid-cols-3 gap-(--spacing-momo-container-gap) relative transition-colors overflow-hidden">
       {/* LEFT SIDE DATA REGION */}
       <div
         key={`left-panel-${currentIndex}`}
-        className={`xl:col-span-2 space-y-[var(--spacing-momo-element-spacing)] will-change-transform ${animationClass}`}
+        className={`xl:col-span-2 space-y-(--spacing-momo-element-spacing) will-change-transform ${animationClass}`}
       >
         <div className="flex items-start justify-between">
           <div>
@@ -142,7 +140,7 @@ export default function AccountDashboard() {
         </div>
 
         {/* CHART SECTION */}
-        <div className="h-56 pt-[var(--spacing-momo-element-spacing)] relative flex items-end">
+        <div className="h-56 pt-(--spacing-momo-element-spacing) relative flex items-end">
           <div className="absolute left-0 bottom-0 top-0 w-12 momo-typo-label-sm-medium text-text-secondary flex flex-col justify-between pr-2 text-right">
             <span>50.0M</span>
             <span>25.0M</span>
@@ -185,77 +183,26 @@ export default function AccountDashboard() {
       </div>
 
       {/* RIGHT SIDE TRANSACTION FEED */}
-      <div className="xl:pl-[var(--spacing-momo-card-padding)] flex flex-col justify-between xl:border-l border-border-default/70">
-        <div className="flex items-center justify-between momo-typo-label-md mb-3">
-          <span className="text-text-default">Recent Activity</span>
-          <Button
-            label="View All"
-            platform="desktop-web"
-            size="xsmall"
-            variant="primary"
-            className="text-momo-blue dark:text-white"
-          />
-        </div>
-
-        {/* The feed slides using the same axis behavior but introduces a slightly staggered sub-reveal class */}
+      <div className="xl:pl-(--spacing-momo-card-padding) flex flex-col justify-between xl:border-l border-border-default/70">
         <div
           key={`right-panel-${currentIndex}`}
-          className={`space-y-3 max-h-56 overflow-y-auto pr-2 will-change-transform ${animationClass} animate-reveal-delayed`}
+          className={`will-change-transform ${animationClass} animate-reveal-delayed`}
         >
-          {activeAccount.transactions.map((tx) => (
-            <div
-              key={`${tx.party}-${tx.time}-${tx.amount}`}
-              className="flex items-center justify-between momo-typo-label-sm-medium border-b border-border-default pb-2"
-            >
-              <div className="flex items-center gap-10">
-                <span
-                  className={`font-bold p-4 rounded-full text-xs ${tx.direction === "out" ? "text-status-danger bg-momo-badgePendingBg" : "text-status-positive bg-surface-secondary"}`}
-                >
-                  {tx.direction === "out" ? (
-                    <ArrowUpRight className="w-3 h-3" />
-                  ) : (
-                    <ArrowDownLeft className="w-3 h-3" />
-                  )}
-                </span>
-                <div>
-                  <p className="tracking-tight text-text-default">{tx.party}</p>
-                  <p className="text-[10px] text-text-secondary">{tx.time}</p>
-                </div>
-              </div>
-              <span
-                className={`font-bold ${tx.direction === "out" ? "text-status-danger" : "text-status-positive"}`}
-              >
-                {tx.amount}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Action Tray */}
-        <div className="flex gap-[var(--spacing-12)] pt-[var(--spacing-momo-element-spacing)]">
-          <Button
-            label="Buy"
-            platform="desktop-web"
-            size="xsmall"
-            variant="primary"
-            fullWidth
-            className="normal-case"
-          />
-          <Button
-            label="Pay"
-            platform="desktop-web"
-            size="xsmall"
-            variant="primary"
-            fullWidth
-            className="normal-case"
-          />
-          <Button
-            label="Transfer"
-            platform="desktop-web"
-            size="xsmall"
-            variant="primary"
-            fullWidth
-            className="normal-case"
+          <TransactionsQuickView
+            title="Transactions"
+            viewAllLabel="View All"
+            items={activeAccount.transactions.map((tx) => ({
+              id: `${tx.party}-${tx.time}-${tx.amount}`,
+              reference: tx.party,
+              subtitle: tx.time,
+              amount: tx.amount,
+              direction: tx.direction,
+            }))}
+            actions={[
+              { id: "buy", label: "Buy", variant: "secondary" },
+              { id: "pay", label: "Pay", variant: "secondary" },
+              { id: "transfer", label: "Transfer", variant: "primary" },
+            ]}
           />
         </div>
       </div>

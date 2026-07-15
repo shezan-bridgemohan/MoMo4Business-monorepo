@@ -62,10 +62,17 @@ type Story = StoryObj<typeof meta>;
 
 export const Showcase: Story = {
   render: () => (
-    <div data-theme="light" className="min-h-screen bg-[#f7f9fc] p-10 text-text-default md:p-12">
+    <div className="min-h-screen bg-surface-secondary p-10 text-text-default md:p-12">
       <div className="momo-content-width space-y-10">
         <section className="rounded-3xl border border-border-default bg-surface-default p-8 shadow-momo-sm md:p-10">
-          <h2 className="momo-typo-heading-md text-momo-blue">Typography</h2>
+          <h1 className="momo-typo-heading-sm text-momo-blue dark:text-white">Foundations / Atoms Showcase</h1>
+          <p className="momo-typo-label-md mt-2 text-text-secondary">
+            Core typography, colors, spacing, and layout primitives used across component stories.
+          </p>
+        </section>
+
+        <section className="rounded-3xl border border-border-default bg-surface-default p-8 shadow-momo-sm md:p-10">
+          <h2 className="momo-typo-heading-sm text-momo-blue dark:text-white">Typography</h2>
           <div className="mt-6 space-y-4">
             {typographySamples.map((sample) => (
               <div key={sample.className} className="border-b border-border-default pb-3 last:border-b-0">
@@ -77,7 +84,7 @@ export const Showcase: Story = {
         </section>
 
         <section className="rounded-3xl border border-border-default bg-surface-default p-8 shadow-momo-sm md:p-10">
-          <h2 className="momo-typo-heading-md text-momo-blue">Colours</h2>
+          <h2 className="momo-typo-heading-sm text-momo-blue dark:text-white">Colors</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {colorSamples.map((sample) => (
               <div
@@ -93,7 +100,7 @@ export const Showcase: Story = {
         </section>
 
         <section className="rounded-3xl border border-border-default bg-surface-default p-8 shadow-momo-sm md:p-10">
-          <h2 className="momo-typo-heading-md text-momo-blue">Spacing</h2>
+          <h2 className="momo-typo-heading-sm text-momo-blue dark:text-white">Spacing</h2>
           <p className="momo-typo-body-sm mt-2 text-text-secondary">
             Each row shows two blocks separated by the token gap.
           </p>
@@ -114,7 +121,7 @@ export const Showcase: Story = {
         </section>
 
         <section className="rounded-3xl border border-border-default bg-surface-default p-8 shadow-momo-sm md:p-10">
-          <h2 className="momo-typo-heading-md text-momo-blue">Grid and Layout</h2>
+          <h2 className="momo-typo-heading-sm text-momo-blue dark:text-white">Grid and Layout</h2>
           <p className="momo-typo-body-sm mt-2 text-text-secondary">
             Visual grid overlays for key breakpoints from the layout tokens.
           </p>
